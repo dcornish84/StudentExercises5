@@ -104,7 +104,46 @@ namespace StudentExercises5
             }
         }
 
+        //part 4--------------------get a list of all the instructors and their cohort
 
+        public List<Instructors> GetInstructors()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT i.Id, i.FirstName, i.LastName, i.Specialty, i.SlackHandle i.CohortId, c.CohortName FROM Instructors i INNER JOIN Cohorts c ON c.id = i.CohortId";
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    List<Instructors> instructors = new List<Instructors>();
+                    while (reader.Read())
+                    {
+                        
+                        int idValue = reader.GetInt32(reader.GetOrdinal("Id"));
+                        string firstName = reader.GetString(reader.GetOrdinal("FirstName"));
+                        string lastName = reader.GetString(reader.GetOrdinal("LastName"));
+                        string specialty = reader.GetString(reader.GetOrdinal("Specialty"));
+                        string slackhandle = reader.GetString(reader.GetOrdinal("SlackHandle"));
+                        int cohortId = reader.GetInt32(reader.GetOrdinal("CohortId"));
+                        string cohortName = reader.GetString(reader.GetOrdinal("CohortName"));
+
+                        
+                        Instructors instructor = new Instructors
+                        {
+                            Id = idValue,
+                            FirstName = firstName,
+                            LastName = lastName,
+                            Specialty = specialty,
+                            CohortId = cohortId
+                           
+                        };
+                        instructors.Add(instructor);
+                    }
+                    reader.Close();
+                    return instructors;
+                }
+            }
+        }
 
 
     }
