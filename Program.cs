@@ -23,9 +23,25 @@ namespace StudentExercises5
 
             //part 2-------------find all the exercises in the database where the language is JavaScript
 
-            List<Exercises> javascriptExercises = repository.GetJavascriptExercises("JavaScript");
-            Console.WriteLine("JavaScript Exercises");
+            List<Exercises> javascriptExercises = repository.GetJavascriptExercises("Javascript");
+            Console.WriteLine("Javascript Exercises");
             foreach (Exercises e in javascriptExercises)
+            {
+                Console.WriteLine($"{e.ExerciseName}: {e.ProgrammingLanguage}");
+            }
+            Console.ReadLine();
+
+            //part 3------------ - insert new exercise into database
+
+            Exercises newExercise = new Exercises
+            {
+                ExerciseName = "Diggers and Fliers",
+                ProgrammingLanguage = "C#"
+            };
+
+            List<Exercises> updatedExercises = repository.GetExercises();
+            Console.WriteLine("Add a new exercise");
+            foreach (Exercises e in updatedExercises)
             {
                 Console.WriteLine($"{e.ExerciseName}: {e.ProgrammingLanguage}");
             }
