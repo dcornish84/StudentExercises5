@@ -86,9 +86,30 @@ namespace StudentExercises5
                 }
             }
         }
+
+        //part 3-------------Insert a new exercise into the database
+
+        public void AddNewExercise(Exercises exercise)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "INSERT INTO Exercise (ExerciseName, ProgrammingLanguage) Values (@name, @language)";
+                    cmd.Parameters.Add(new SqlParameter("@name", exercise.ExerciseName));
+                    cmd.Parameters.Add(new SqlParameter("@language", exercise.ProgrammingLanguage));
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+
+
     }
 
-   
-        
-    
+
+
+
 }
