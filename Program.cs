@@ -49,6 +49,16 @@ namespace StudentExercises5
 
 
 
+            // part 4-------------------- find all instructors in the database. Include each instructor's cohort.
+            List<Instructors> instructors = repository.GetInstructors();
+            Console.WriteLine("All Instructors");
+            foreach (Instructors i in instructors)
+            {
+                Console.WriteLine($"{i.CohortId}: {i.FirstName} {i.LastName}, {i.Specialty}");
+            }
+            Console.ReadLine();
+
+
 
         }
     }
