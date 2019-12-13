@@ -33,7 +33,7 @@ namespace StudentExercises5
 
             //part 3------------ - insert new exercise into database
 
-            Exercises newExercise = new Exercises
+            Exercises AddNewExercise = new Exercises
             {
                 ExerciseName = "Diggers and Fliers",
                 ProgrammingLanguage = "C#"
@@ -49,7 +49,8 @@ namespace StudentExercises5
 
 
 
-            // part 4-------------------- find all instructors in the database. Include each instructor's cohort.
+            // part 4-------------------- find all instructors in the database. Include each instructor's cohort
+
             List<Instructors> instructors = repository.GetInstructors();
             Console.WriteLine("All Instructors");
             foreach (Instructors i in instructors)
@@ -57,6 +58,26 @@ namespace StudentExercises5
                 Console.WriteLine($"{i.CohortId}: {i.FirstName} {i.LastName}, {i.Specialty}");
             }
             Console.ReadLine();
+
+            //part 5--------------------insert a new instructor into the database. Assign the instructor to an existing cohort
+
+            Instructors AddNewInstructor = new Instructors
+            {
+                FirstName = "Paul",
+                LastName = "Javaseesharp",
+                SlackHandle = "HeyImPaul",
+                Specialty = "Languages",
+                CohortId = 3
+            };
+
+            List<Instructors> updatedInstructors = repository.GetInstructors();
+            Console.WriteLine("Add a new Instructor");
+            foreach (Instructors i in updatedInstructors)
+            {
+                Console.WriteLine($"{i.FirstName} {i.LastName} {i.SlackHandle} {i.Specialty} {i.CohortId}");
+            }
+            Console.ReadLine();
+
 
 
 
