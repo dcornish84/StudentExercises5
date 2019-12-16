@@ -79,6 +79,8 @@ namespace StudentExercises5
             Console.ReadLine();
 
 
+            //part 6--------------------Assign an existing exercise to an existing student
+
 
 
         }

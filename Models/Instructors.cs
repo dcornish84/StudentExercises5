@@ -18,6 +18,8 @@ namespace StudentExercises5.Models
 
         public int CohortId { get; set; }
 
+        public string CohortName { get; set; }
+
         
     }
 }
