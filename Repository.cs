@@ -134,7 +134,9 @@ namespace StudentExercises5
                             FirstName = firstName,
                             LastName = lastName,
                             Specialty = specialty,
-                            CohortId = cohortId
+                            CohortId = cohortId,
+                            CohortName = cohortName,
+                            SlackHandle = slackhandle
                            
                         };
                         instructors.Add(instructor);
@@ -145,6 +147,62 @@ namespace StudentExercises5
             }
         }
 
+        //part 5--------------------insert a new instructor into the database. Assign the instructor to an existing cohort
+
+        public void AddNewInstructor(Instructors instructor)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "INSERT INTO Instructor (FirstName, LastName, SlackHandle, Specialty, CohortId) Values (@firstname, @lastname, @slackhandle. @specialty, @cohortid)";
+                    cmd.Parameters.Add(new SqlParameter("@firstname", instructor.FirstName));
+                    cmd.Parameters.Add(new SqlParameter("@lastname", instructor.LastName));
+                    cmd.Parameters.Add(new SqlParameter("@slackhandle", instructor.SlackHandle));
+                    cmd.Parameters.Add(new SqlParameter("@specialty", instructor.Specialty));
+                    cmd.Parameters.Add(new SqlParameter("@cohortid", instructor.CohortId));
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+      
+
+        public void AddNewStudent(Students student)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "INSERT INTO Students (FirstName, LastName, SlackHandle, CohortId) Values (@firstname, @lastname, @slackhandle, @cohortid)";
+                    cmd.Parameters.Add(new SqlParameter("@firstname", student.FirstName));
+                    cmd.Parameters.Add(new SqlParameter("@lastname", student.LastName));
+                    cmd.Parameters.Add(new SqlParameter("@slackhandle", student.SlackHandle));
+                    cmd.Parameters.Add(new SqlParameter("@cohortid", student.CohortId));
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        //part 6--------------------Assign an existing exercise to an existing student
+
+
+        public void AddExercise(int studentId, int exerciseId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "INSERT INTO StudentExercises (StudentId, ExerciseId) Values (@studentId, @exerciseId)";
+                    cmd.Parameters.AddWithValue("@studentId", studentId);
+                    cmd.Parameters.AddWithValue("@exerciseId", exerciseId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
     }
 
